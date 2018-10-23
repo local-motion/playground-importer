@@ -89,38 +89,3 @@ class PlaygroundImporter:
                 logging.error(failure_message)
             else:
                 logging.info("Success line #{}: {}".format(result.line_number, result.message))
-
-        # results = []
-        # for s in wb.sheets():
-        #     for row in range(1, s.nrows):
-        #         try:
-        #             logging.info(row)
-        #
-        #             col_names = s.row(0)
-        #             col_value = []
-        #             for name, col in zip(col_names, range(s.ncols)):
-        #                 cell = s.cell(row, col)
-        #                 value = cell.value
-        #
-        #             name_ = row['name']
-        #             email_ = row['email']
-        #             ip_ = row['ip']
-        #             onboarding_uuid = str(uuid.uuid4())[:8]
-        #
-        #             playground = Playground(name_, email_, ip_, onboarding_uuid)
-        #
-        #             for row_callback in row_callbacks:
-        #                 result = row_callback(playground) or \
-        #                          Result.general_failure(playground, "Function didn't return a result")
-        #                 results.append(result)
-        #                 result.assign_line_number(reader.line_num)
-        #         except BaseException as e:
-        #             self.__report_exception("Parsing CSV failed: {}".format(e))
-        #
-        # for result in results:
-        #     if result.is_failure():
-        #         failure_message = "Failed line #{}: {} {}".format(
-        #             result.line_number, result.message, result.exception)
-        #         logging.error(failure_message)
-        #     else:
-        #         logging.info("Success line #{}: {}".format(result.line_number, result.message))
