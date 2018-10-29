@@ -61,7 +61,7 @@ class PlaygroundImporter:
         # Titel	Marker type	Adres	Huisnummer	Postcode	Plaats	Soort	Status	Marker website	Kolom1	Kolom2
         for index, row in playgrounds.iterrows():
             try:
-                playground_uuid = str(uuid.uuid4())[:8]
+                playground_uuid = str(uuid.uuid4())
                 name_ = row['Titel']
                 type_ = row['Soort']
                 status_ = row['Status']

@@ -13,7 +13,11 @@ class Result:
         return cls(playground=playground, message=message, exception=None)
 
     @classmethod
-    def failure(cls, playground: Playground, message: str, exception: BaseException) -> 'Result':
+    def failure(cls, playground: Playground, message: str) -> 'Result':
+        return cls(playground=playground, message=message, exception=None)
+
+    @classmethod
+    def exception(cls, playground: Playground, message: str, exception: BaseException) -> 'Result':
         return cls(playground=playground, message=message, exception=exception)
 
     @classmethod
