@@ -1,4 +1,6 @@
 import logging
+
+import jsonpickle as jsonpickle
 import requests
 
 from src.localmotion.domain.result import Result
@@ -13,11 +15,15 @@ class CommunityApi:
 
     def create_or_update(self, playground: Playground):
         try:
-            r = requests.post(self.target_endpoint, data=playground)
+            json = jsonpickle.encode(playground, unpicklable=False)
+            r = requests.post(self.target_endpoint, data=json)
             logging.info(r)
-            Result.success(playground, "Added playground {} to Local Motion".format(playground.title))
+            if 200 <= r.status_code < 300:
+                Result.success(playground, "Added playground {} to Local Motion".format(playground.name))
+            else:
+                return Result.failure(playground, "Status {}".format(r.status_code))
         except BaseException as e:
             failure_message = "Could not add playground {} to Local Motion at {}".format(
-                playground.title, self.target_endpoint)
-            return Result.failure(playground, failure_message, e)
+                playground.name, self.target_endpoint)
+            return Result.exception(playground, failure_message, e)
 
