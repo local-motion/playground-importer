@@ -10,7 +10,7 @@ In general, the script:
 1. Takes a playground Xlsx file
 1. Turns it into JSON
 1. For each playground
-    1. Creates a playground in Local Motion (requires env `COMMUNITY_API`)
+    1. Creates a playground in Local Motion (requires env `ONBOARDING_API`)
 
 
 
@@ -18,7 +18,7 @@ In general, the script:
 ### Run it as an executable (not a service)
 ```
 docker run --rm -v $(PWD)/samples:/imports -v $(PWD)/html_templates:/html_templates \
-    -e COMMUNITY_API=http://localhost:8082/playgrounds \
+    -e ONBOARDING_API=http://localhost:8082/playgrounds \
     localmotion/playground-importer \
     $(whoami)_docker
     /imports/1_playground.xlsx
@@ -44,7 +44,7 @@ pip install -r requirements.txt
 Then to subsequently add the following to a local `.env` file. Enable Mailchimp and Sentry
 integrations by setting respective env variables.
 ```
-COMMUNITY_API=http://localhost:8082/playgrounds
+ONBOARDING_API=http://localhost:8082/playgrounds
 
 # Sentry.io configuration
 SENTRY_DSN=

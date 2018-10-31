@@ -4,3 +4,6 @@ class Address:
         self.number = number
         self.zipcode = zipcode
         self.city = city
+
+    def to_readable_address(self):
+        return "{} {}, {}, {}, Nederland".format(self.street, self.number, self.zipcode, self.city)
