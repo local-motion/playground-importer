@@ -7,7 +7,7 @@ from src.localmotion.domain.result import Result
 from src.localmotion.domain.playground import Playground
 
 
-class CommunityApi:
+class OnboardingApi:
 
     def __init__(self, namespace: str, target_endpoint: str) -> None:
         self.namespace = namespace
@@ -16,7 +16,8 @@ class CommunityApi:
     def create_or_update(self, playground: Playground):
         try:
             json = jsonpickle.encode(playground, unpicklable=False)
-            r = requests.post(self.target_endpoint, data=json)
+            headers = {"Content-Type": "application/json"}
+            r = requests.post(self.target_endpoint, headers=headers, data=json)
             logging.info(r)
             if 200 <= r.status_code < 300:
                 Result.success(playground, "Added playground {} to Local Motion".format(playground.name))

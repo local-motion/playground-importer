@@ -19,7 +19,7 @@ if len(sys.argv) != 3:
     logging.info("Usage: python {} $(whoami) $(pwd)/samples/1_playground.csv".format(Path(__file__).name))
     logging.info("""Environment variables to consider:
     
-    COMMUNITY_API=http://localhost:8082/playgrounds
+    ONBOARDING_API=http://localhost:8082/playgrounds
     SENTRY_DSN=<sentry-dsn>
     DEBUG=true
     """)
