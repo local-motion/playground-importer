@@ -3,3 +3,6 @@ raven
 python-dotenv
 pandas
 geocoder
+joblib
+jsonpickle
+xlrd
