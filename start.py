@@ -17,10 +17,18 @@ logger.setLevel(logging.DEBUG if debug_mode else logging.INFO)
 
 if len(sys.argv) != 3:
     logging.info("Usage: python {} $(whoami) $(pwd)/samples/1_playground.csv".format(Path(__file__).name))
-    logging.info("""Environment variables to consider:
+    logging.info("""Environment variables to consider, and please note .env file is supported:
     
+    # JWT Token
+    ID_TOKEN=
+
+    # Local Motion's playground API
     ONBOARDING_API=http://localhost:8082/playgrounds
+    
+    # Optional, Sentry.io configuration
     SENTRY_DSN=<sentry-dsn>
+    
+    # Toggles verbose output
     DEBUG=true
     """)
     sys.exit(1)
@@ -36,11 +44,16 @@ def configure_http_logging():
 
 namespace = sys.argv[1]
 source = sys.argv[2]
+jwt_token = os.getenv('ID_TOKEN')
+
+if not jwt_token:
+    logging.error("Environment variable ID_TOKEN is required. Consider adding it to your .env file.")
+    sys.exit(1)
 
 logging.info("Namespacing everything in: {}".format(namespace))
 logging.info("CSV source file: {}".format(source))
 
 if __name__ == '__main__':
-    playground_importer = PlaygroundImporter(namespace, source)
+    playground_importer = PlaygroundImporter(namespace, source, jwt_token)
     playground_importer.parse_playgrounds()
 
