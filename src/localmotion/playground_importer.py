@@ -37,8 +37,7 @@ requests_log.propagate = True
 
 
 class PlaygroundImporter:
-    def __init__(self, namespace: str, source: str, jwt_token: str) -> None:
-        self.namespace = namespace
+    def __init__(self, source: str, jwt_token: str) -> None:
         self.source = source
         self.jwt_token = jwt_token
         self.sentry = PlaygroundImporter.__configure_sentry()
@@ -64,7 +63,7 @@ class PlaygroundImporter:
             logging.warning("You are NOT using Local Motion community API")
             return None
         logging.info("Connecting to Local Motion community API using {}".format(target_endpoint))
-        return OnboardingApi(self.namespace, target_endpoint, self.jwt_token)
+        return OnboardingApi(target_endpoint, self.jwt_token)
 
     def __report_exception(self, msg, *args, **kwargs):
         logging.error(msg, args, kwargs)

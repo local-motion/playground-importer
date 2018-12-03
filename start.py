@@ -15,8 +15,8 @@ logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG if debug_mode else logging.INFO)
 
-if len(sys.argv) != 3:
-    logging.info("Usage: python {} $(whoami) $(pwd)/samples/1_playground.csv".format(Path(__file__).name))
+if len(sys.argv) != 2:
+    logging.info("Usage: python {} $(pwd)/samples/1_playground.csv".format(Path(__file__).name))
     logging.info("""Environment variables to consider, and please note .env file is supported:
     
     # JWT Token
@@ -42,18 +42,16 @@ def configure_http_logging():
     requests_log.propagate = True
 
 
-namespace = sys.argv[1]
-source = sys.argv[2]
+source = sys.argv[1]
 jwt_token = os.getenv('ID_TOKEN')
 
 if not jwt_token:
     logging.error("Environment variable ID_TOKEN is required. Consider adding it to your .env file.")
     sys.exit(1)
 
-logging.info("Namespacing everything in: {}".format(namespace))
 logging.info("CSV source file: {}".format(source))
 
 if __name__ == '__main__':
-    playground_importer = PlaygroundImporter(namespace, source, jwt_token)
+    playground_importer = PlaygroundImporter(source, jwt_token)
     playground_importer.parse_playgrounds()
 
