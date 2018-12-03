@@ -13,23 +13,7 @@ In general, the script:
     1. Creates a playground in Local Motion (requires env `ONBOARDING_API`)
 
 
-
 ## Docker
-### Run it as an executable (not a service)
-```
-docker run --rm -v $(PWD)/samples:/imports -v $(PWD)/html_templates:/html_templates \
-    -e ONBOARDING_API=http://localhost:8082/playgrounds \
-    localmotion/playground-importer \
-    $(whoami)_docker
-    /imports/1_playground.xlsx
-```
-
-### Build Docker image from source
-```
-docker build -t localmotion/playground-importer .
-```
-
-
 ## Command line
 
 ### Install dependencies
@@ -62,9 +46,28 @@ source playgrounds/bin/activate
 
 And then simply run:
 ```
-python start.py $(whoami)_automated $(pwd)/samples/1_playground.xlsx 
+python start.py $(pwd)/samples/1_playground.xlsx
 ```
 
 ### XLSX import samples
 Samples can be found at [Samples](./samples) in this repository.
- 
+
+
+# WORK IN PROGRESS
+
+### Run it as an executable (not a service)
+
+Important: The following does **NOT** work yet. Building a Python application on Travis
+that uses Pandas and Numpy take a long long time (15+ minutes). We haven't
+found a great way to build this application yet.
+```
+docker run --rm -v $(PWD)/samples:/imports -v $(PWD)/html_templates:/html_templates \
+    -e ONBOARDING_API=http://localhost:8082/playgrounds \
+    localmotion/playground-importer \
+    /imports/1_playground.xlsx
+```
+
+### Build Docker image from source
+```
+docker build -t localmotion/playground-importer .
+```

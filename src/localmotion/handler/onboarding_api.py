@@ -9,8 +9,7 @@ from src.localmotion.domain.playground import Playground
 
 class OnboardingApi:
 
-    def __init__(self, namespace: str, target_endpoint: str, jwt_token: str) -> None:
-        self.namespace = namespace
+    def __init__(self, target_endpoint: str, jwt_token: str) -> None:
         self.target_endpoint = target_endpoint
         self.jwt_token = jwt_token
 

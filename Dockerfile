@@ -10,11 +10,17 @@ RUN apk add --no-cache python3-dev libstdc++ && \
     apk del .build-deps
 RUN mkdir /install
 WORKDIR /install
-COPY requirements.txt /requirements.txt
-RUN pip install --install-option="--prefix=/install" -r /requirements.txt
+COPY pandas.txt /pandas.txt
+RUN pip install --install-option="--prefix=/install" -r /pandas.txt
+RUN ls -lag /install
 
 FROM base
+COPY requirements.txt /requirements.txt
+
 COPY --from=builder /install /usr/local
+RUN ls -lag /usr/local
+RUN pip install --install-option="--prefix=/usr/local" -r /requirements.txt
+RUN ls -lag /usr/local
 
 RUN mkdir /app
 RUN mkdir /app/src
