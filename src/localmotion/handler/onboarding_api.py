@@ -9,18 +9,22 @@ from src.localmotion.domain.playground import Playground
 
 class OnboardingApi:
 
-    def __init__(self, namespace: str, target_endpoint: str) -> None:
+    def __init__(self, namespace: str, target_endpoint: str, jwt_token: str) -> None:
         self.namespace = namespace
         self.target_endpoint = target_endpoint
+        self.jwt_token = jwt_token
 
     def create_or_update(self, playground: Playground):
         try:
             json = jsonpickle.encode(playground, unpicklable=False)
-            headers = {"Content-Type": "application/json"}
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer {}".format(self.jwt_token)
+            }
             r = requests.post(self.target_endpoint, headers=headers, data=json)
             logging.info(r)
             if 200 <= r.status_code < 300:
-                Result.success(playground, "Added playground {} to Local Motion".format(playground.name))
+                return Result.success(playground, "Added playground {} to Local Motion".format(playground.name))
             else:
                 return Result.failure(playground, "Status {}".format(r.status_code))
         except BaseException as e:
