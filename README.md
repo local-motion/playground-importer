@@ -22,17 +22,13 @@ pip install -r requirements.txt
 ```
 
 ### Configure
-Then to subsequently add the following to a local `.env` file. Enable Mailchimp and Sentry
-integrations by setting respective env variables.
+Then to subsequently add the following to a local `.env` file.
 ```
 # JWT token
 ID_TOKEN=
 
 # API URL
-ONBOARDING_API=http://localhost:8082/playgrounds
-
-# Sentry.io configuration
-SENTRY_DSN=
+ONBOARDING_API=http://localhost:8086/api/playgrounds
 ```
 
 ### Run it from command line
