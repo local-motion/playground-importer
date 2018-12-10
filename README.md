@@ -3,9 +3,6 @@
 This importer allows to seed our database with playgrounds that have indicated
 that they're interested in making venues, such as children playgrounds, smoke-free.
 
-Note - It currently doesn't support auth, so it assumes a `kube port-forward` in case of
-non-local environments.
-
 In general, the script:
 1. Takes a playground Xlsx file
 1. Turns it into JSON
