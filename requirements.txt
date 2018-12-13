@@ -2,6 +2,8 @@ requests
 raven
 python-dotenv
 geocoder
+pandas
 joblib
 jsonpickle
 xlrd
+six
