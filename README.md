@@ -30,6 +30,10 @@ ID_TOKEN=
 # API URL
 ONBOARDING_API=http://localhost:8086/api/playgrounds
 ```
+The importer will verify the validity of the TLS certificate when https is used. To disable certificate validation add this to the .env file:
+```
+DISABLE_CERTIFICATE_VALIDATION=true
+```
 
 ### Run it from command line
 Make sure you switched to the correct `virtualenv`:
