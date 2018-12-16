@@ -1,5 +1,5 @@
 import logging
-
+import os
 import jsonpickle as jsonpickle
 import requests
 
@@ -14,13 +14,21 @@ class OnboardingApi:
         self.jwt_token = jwt_token
 
     def create_or_update(self, playground: Playground):
+        certificateValidationDisabled = os.getenv('DISABLE_CERTIFICATE_VALIDATION')
+
+        if certificateValidationDisabled is None or certificateValidationDisabled.upper() != "TRUE":
+            verifyCertificate = True
+        else:
+            verifyCertificate = False
+        logging.info("verifyCertificate:" + str(verifyCertificate))
+
         try:
             json = jsonpickle.encode(playground, unpicklable=False)
             headers = {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer {}".format(self.jwt_token)
             }
-            r = requests.post(self.target_endpoint, headers=headers, data=json)
+            r = requests.post(self.target_endpoint, headers=headers, data=json, verify=verifyCertificate)
             logging.info(r)
             if 200 <= r.status_code < 300:
                 return Result.success(playground, "Added playground {} to Local Motion".format(playground.name))

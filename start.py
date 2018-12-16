@@ -24,7 +24,10 @@ if len(sys.argv) != 2:
 
     # Local Motion's playground API
     ONBOARDING_API=http://localhost:8082/playgrounds
-    
+
+    # For de-activating TLS certificate validation
+    DISABLE_CERTIFICATE_VALIDATION = true
+
     # Optional, Sentry.io configuration
     SENTRY_DSN=<sentry-dsn>
     
