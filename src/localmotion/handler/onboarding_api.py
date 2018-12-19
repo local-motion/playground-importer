@@ -14,13 +14,13 @@ class OnboardingApi:
         self.jwt_token = jwt_token
 
     def create_or_update(self, playground: Playground):
-        certificateValidationDisabled = os.getenv('DISABLE_CERTIFICATE_VALIDATION')
+        certificate_validation_disabled = os.getenv('DISABLE_CERTIFICATE_VALIDATION')
 
-        if certificateValidationDisabled is None or certificateValidationDisabled.upper() != "TRUE":
-            verifyCertificate = True
+        if certificate_validation_disabled is None or certificate_validation_disabled.upper() != "TRUE":
+            verify_certificate = True
         else:
-            verifyCertificate = False
-        logging.info("verifyCertificate:" + str(verifyCertificate))
+            verify_certificate = False
+        logging.info("verify_certificate:" + str(verify_certificate))
 
         try:
             json = jsonpickle.encode(playground, unpicklable=False)
@@ -28,7 +28,7 @@ class OnboardingApi:
                 "Content-Type": "application/json",
                 "Authorization": "Bearer {}".format(self.jwt_token)
             }
-            r = requests.post(self.target_endpoint, headers=headers, data=json, verify=verifyCertificate)
+            r = requests.post(self.target_endpoint, headers=headers, data=json, verify=verify_certificate)
             logging.info(r)
             if 200 <= r.status_code < 300:
                 return Result.success(playground, "Added playground {} to Local Motion".format(playground.name))

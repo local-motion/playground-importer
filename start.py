@@ -57,4 +57,3 @@ logging.info("CSV source file: {}".format(source))
 if __name__ == '__main__':
     playground_importer = PlaygroundImporter(source, jwt_token)
     playground_importer.parse_playgrounds()
-
