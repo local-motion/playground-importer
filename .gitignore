@@ -14,6 +14,10 @@ __pycache__/
 # C extensions
 *.so
 
+# Ignore excel files to prevent playground data accidentally being pushed onto github
+*.xls
+*.xlsx
+
 # Distribution / packaging
 .Python
 build/
