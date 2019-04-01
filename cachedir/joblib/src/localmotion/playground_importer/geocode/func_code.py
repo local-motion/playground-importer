@@ -1,4 +1,4 @@
-# first line: 74
+# first line: 73
     @staticmethod
     def geocode(address: str):
         logging.info("Fetching geolocation for [{}] from LocationIQ".format(address))
