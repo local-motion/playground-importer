@@ -81,11 +81,11 @@ class PlaygroundImporter:
     @staticmethod
     def determine_status(imported_status: str):
         if imported_status == 'Geheel rookvrij':
-            return "finished"
+            return "IMPORT_FINISHED"
         elif imported_status == "Gedeeltelijk rookvrij":
-            return "in_progress"
+            return "IMPORT_NOT_STARTED"
         else:
-            return "not_started"
+            return "IMPORT_NOT_STARTED"
 
     @staticmethod
     def determine_website(imported_website: str):
@@ -127,7 +127,9 @@ class PlaygroundImporter:
                 geolocation = cached_geocode(readable_address)
                 logging.info("[{}] resulted in {},{}".format(readable_address, geolocation.lat, geolocation.lng))
 
-                playground = Playground(playground_uuid, name_, address_, geolocation, type_, status_, website_)
+                # playground = Playground(playground_uuid, name_, address_, geolocation, type_, status_, website_)
+                creationStatus = status_
+                playground = Playground(playground_uuid, name_, creationStatus, geolocation)
                 for row_callback in row_callbacks:
                     result = row_callback(playground) or \
                              Result.general_failure(playground, "Function didn't return a result")

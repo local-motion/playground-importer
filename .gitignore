@@ -189,3 +189,5 @@ pyvenv.cfg
 .venv
 pip-selfcheck.json
 
+# Linters
+playgrounds/tcl/
