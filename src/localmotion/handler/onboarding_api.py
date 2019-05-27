@@ -26,7 +26,7 @@ class OnboardingApi:
             json = jsonpickle.encode(playground, unpicklable=False)
             headers = {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer {}".format(self.jwt_token)
+                "AuthBearer": "Bearer {}".format(self.jwt_token)
             }
             r = requests.post(self.target_endpoint, headers=headers, data=json, verify=verify_certificate)
             logging.info(r)
