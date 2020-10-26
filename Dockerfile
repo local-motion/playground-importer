@@ -1,4 +1,4 @@
-FROM python:3.7-alpine as base
+FROM python:3.9-alpine as base
 
 FROM base as builder
 ARG PANDAS_VERSION=0.23.4
